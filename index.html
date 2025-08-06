@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Absensi</title>
+    <link href="./dist/output.css" rel="stylesheet" />
+    <!-- Font Awesome CDN -->
+    <script
+      src="https://kit.fontawesome.com/e0c9847bbc.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body
+    class="bg-gradient-to-bl from-[#32174E] to-[#4B2177] bg-no-repeat bg-fixed text-white text-inter h-lvh"
+  >
+    <!-- HEADER -->
+    <header
+      class="flex flex-col justify-center items-center bg-white placeholder-teal-800 px-5 pt-6 pb-10 rounded-b-full"
+      id="header"
+    >
+      <h1
+        class="text-[#F4BA35] text-montserrat font-black text-4xl w-full text-center"
+        id="judul"
+      >
+        Absensi
+      </h1>
+      <div class="w-full flex justify-center" id="logo-sif">
+        <img
+          src="src/FINAL-SIF20-logo.png"
+          class="w-40 drop-shadow-md"
+          alt="Logo SIF"
+        />
+      </div>
+    </header>
+
+    <!-- NARASUMBER -->
+    <main
+      class="w-full flex-col p-10 pt-8 duration-500 -z-20 flex transition-all ease-in-out"
+      id="select-narasumber"
+    >
+      <h2 class="text-center text-2xl font-bold mb-10 text-[#F4BA35]">
+        13 Agustus 2023
+      </h2>
+
+      <div class="flex gap-5 flex-col text-sm">
+        <div class="flex flex-col">
+          <div class="flex">
+            <img src="src/silhouette.png" alt="narasumber-x" class="w-50" />
+            <div
+              class="w-full h-full flex flex-col justify-center items-center pt-8 text-center"
+            >
+              <h2 class="font-semibold">Vokasi, Prompting, dan Vibe Coding</h2>
+              <p>Cycas Rifky</p>
+              <p class="text-sm">08:00 - 12:30</p>
+            </div>
+          </div>
+          <button
+            class="bg-[#F4BA35] p-2 min-w-1/2 rounded-lg bold"
+            id="narasumber-1"
+          >
+            Absen
+          </button>
+        </div>
+
+        <div class="flex flex-col">
+          <div class="flex flex-row-reverse">
+            <img src="src/silhouette.png" alt="narasumber-x" class="w-50" />
+            <div
+              class="w-full h-full flex flex-col justify-center items-center pt-8 text-center"
+            >
+              <h2 class="font-semibold">Cerdas Kelola Uang di Era Digital</h2>
+              <p>Himawan Adhi</p>
+              <p class="text-sm">13:00 - 15:00</p>
+            </div>
+          </div>
+          <button
+            class="bg-[#F4BA35] p-2 min-w-1/2 rounded-lg bold"
+            id="narasumber-2"
+          >
+            Absen
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- FORM -->
+    <div
+      class="w-full flex-col pb-3 px-0 pt-0 duration-500 -z-20 opacity-0 hidden transition-all ease-in-out"
+      id="form-absensi"
+    >
+      <div class="text-white py-10 px-6">
+        <p class="text-lg opacity-90 text-center">
+          <span id="keteranganForm"
+            >Form absensi Smart IT Festival untuk seminar 1.</span
+          >
+        </p>
+
+        <div class="py-10">
+          <div
+            class="bg-cyan-100 text-cyan-900 border border-cyan-300 p-4 rounded mb-6 flex items-center gap-2"
+          >
+            <i class="fas fa-circle-info text-blue-500"></i>
+            <span>Silakan isi formulir absensi berikut dengan lengkap</span>
+          </div>
+
+          <div id="alert" class="hidden p-4 mb-5 rounded"></div>
+
+          <form id="attendanceForm" class="space-y-6">
+            <div>
+              <label for="nim" class="block font-semibold mb-2">NIM *</label>
+              <input
+                type="text"
+                id="nim"
+                name="nim"
+                required
+                class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-black"
+              />
+            </div>
+
+            <div>
+              <label for="name" class="block font-semibold mb-2"
+                >Nama Lengkap *</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-black"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="block font-semibold mb-2"
+                >Email *</label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-black"
+              />
+            </div>
+
+            <div>
+              <label for="phone" class="block font-semibold mb-2"
+                >Nomor Handphone *</label
+              >
+              <input
+                type="text"
+                id="phone"
+                name="phone"
+                required
+                class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-black"
+              />
+            </div>
+
+
+            <div>
+              <label for="institution" class="block font-semibold mb-2"
+                >Instansi *</label
+              >
+              <input
+                type="text"
+                id="institution"
+                name="institution"
+                required
+                class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-black"
+              />
+            </div>
+
+            <div>
+              <label class="block font-semibold mb-2">Lokasi Anda *</label>
+              <div class="bg-gray-100 p-4 rounded-lg">
+                <button
+                  type="button"
+                  id="getLocationBtn"
+                  class="bg-gray-600 text-white px-6 py-2 rounded hover:bg-gray-700 flex items-center gap-2"
+                >
+                  <i class="fas fa-location-dot"></i> Dapatkan Lokasi
+                </button>
+                <div
+                  id="locationInfo"
+                  class="mt-4 space-y-2 text-sm text-black"
+                ></div>
+              </div>
+            </div>
+
+            <div class="pt-6 border-t border-gray-300 text-center">
+              <button
+                type="submit"
+                id="submitBtn"
+                class="bg-[#F4BA35] text-white font-bold py-3 px-6 rounded-lg shadow hover:shadow-lg flex items-center justify-center gap-2"
+              >
+                <i class="fas fa-circle-check"></i> Submit Absensi
+              </button>
+            </div>
+          </form>
+
+          <div id="loading" class="hidden text-center mt-6">
+            <div
+              class="w-10 h-10 border-4 border-gray-200 border-t-indigo-500 rounded-full animate-spin mx-auto mb-2"
+            ></div>
+            <p class="text-gray-600 flex items-center justify-center gap-2">
+              <i class="fas fa-spinner animate-spin"></i> Mengirim data...
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
