@@ -230,6 +230,30 @@ form.addEventListener("submit", async function (e) {
   showLoading(true);
 
   try {
+    const kode = document.getElementById("kode_registrasi").value.trim();
+
+    // Cek apakah kode ditemukan
+    /*
+    script day 1: https://script.google.com/macros/s/AKfycbzJHMpuNWUioevQcvSNR5hmddyDZzU3HY_qHuGGL43lWdL3w1aH11o49salT2OI26vb/exec
+    script day 2: https://script.google.com/macros/s/AKfycbxK3ndYmHULg59hrDTdBN9jaKF6OB9um6ychIoR1yz3D9LSCythClRJvwV7i9QLqZjU/exec
+    */
+    const checkResponse = await fetch(
+      `https://script.google.com/macros/s/AKfycbzJHMpuNWUioevQcvSNR5hmddyDZzU3HY_qHuGGL43lWdL3w1aH11o49salT2OI26vb/exec?value=${encodeURIComponent(
+        kode
+      )}`
+    );
+    const checkResult = await checkResponse.json();
+
+    if (!checkResult.found) {
+      showAlert(
+        "error",
+        `<i class="fas fa-circle-xmark"></i> Kode registrasi <strong>${kode}</strong> tidak ditemukan`
+      );
+      showLoading(false);
+      return;
+    }
+
+    // lanjutkan kalau valid
     const formData = {
       nim: document.getElementById("nim").value.trim(),
       name: document.getElementById("name").value.trim(),
@@ -238,6 +262,7 @@ form.addEventListener("submit", async function (e) {
       institution: document.getElementById("institution").value.trim(),
       speaker: currentNarasumber?.speaker || "Tidak diketahui",
       location: currentLocation,
+      kode_registrasi: kode,
       timestamp: serverTimestamp(),
       submittedAt: new Date().toISOString(),
     };
@@ -261,11 +286,14 @@ form.addEventListener("submit", async function (e) {
 });
 
 function validateForm() {
+  const nim = document.getElementById("nim").value.trim();
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
   const institution = document.getElementById("institution").value.trim();
+  const kode = document.getElementById("kode_registrasi").value.trim();
 
-  if (!name || !email || !institution) {
+  if (!nim || !phone || !name || !email || !institution || !kode) {
     showAlert(
       "error",
       `<i class="fas fa-circle-xmark"></i> Semua field wajib harus diisi`
