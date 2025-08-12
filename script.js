@@ -1,27 +1,7 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  serverTimestamp,
-} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-
-// Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyAs_KjZNtjBtxrjcpqk7x57KMfJbeVn99U",
-  authDomain: "absensisif.firebaseapp.com",
-  projectId: "absensisif",
-  storageBucket: "absensisif.firebasestorage.app",
-  messagingSenderId: "832956830053",
-  appId: "1:832956830053:web:c1a40500cda90f5f5f918c",
-  measurementId: "G-1NC9CPVPFP",
-};
-
-// Firebase init
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const db = getFirestore(app);
+// URL Web App Google Apps Script kamu
+// Pastikan sudah di-deploy sebagai Web App: "Anyone with the link"
+const APP_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbwNSgZgDT7-QroovNJj8Va8XMNuVUYEGzHtGBWmMF_RHfDKNuDLCoYML3v27xycL27R/exec";
 
 // DOM refs
 const main = document.getElementById("select-narasumber");
@@ -45,7 +25,7 @@ const data = [
   {
     name: "Vokasi, Prompting, dan Vibe Coding: Siap menghadapi AI-driven Industry?",
     speaker: "Cycas Rifky",
-    startTime: "08:00",
+    startTime: "00:00",
     endTime: "12:30",
   },
   {
@@ -59,7 +39,7 @@ const data = [
 // Fungsi untuk memeriksa waktu dan menonaktifkan tombol
 function checkTimeAndDisableButtons() {
   const now = new Date();
-  const currentTime = now.getHours() * 60 + now.getMinutes(); // Waktu saat ini dalam menit
+  const currentTime = now.getHours() * 60 + now.getMinutes();
 
   data.forEach((narasumber, index) => {
     const button = document.getElementById(`narasumber-${index + 1}`);
@@ -87,7 +67,6 @@ function checkTimeAndDisableButtons() {
   });
 }
 
-// Event tombol narasumber
 document
   .getElementById("narasumber-1")
   .addEventListener("click", () => showForm(0));
@@ -95,13 +74,11 @@ document
   .getElementById("narasumber-2")
   .addEventListener("click", () => showForm(1));
 
-// Panggil fungsi saat halaman dimuat dan setiap menit
 document.addEventListener("DOMContentLoaded", checkTimeAndDisableButtons);
-setInterval(checkTimeAndDisableButtons, 60000); // Cek setiap 60 detik
+setInterval(checkTimeAndDisableButtons, 60000);
 
 function showForm(index) {
   currentNarasumber = data[index];
-
   keteranganForm.innerText = `Form absensi Smart IT Festival untuk ${currentNarasumber.name}. Oleh: ${currentNarasumber.speaker}`;
 
   header.classList.add(
@@ -162,11 +139,8 @@ getLocationBtn.addEventListener("click", function () {
         currentLocation.latitude,
         currentLocation.longitude
       );
-
       currentLocation.address = address || {
         formatted: "Alamat tidak dapat ditemukan",
-        details: null,
-        full: null,
       };
 
       showLocationSuccess();
@@ -191,31 +165,11 @@ async function getAddressFromCoords(lat, lon) {
   try {
     const response = await fetch(
       `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`,
-      {
-        headers: { "User-Agent": "AbsensiApp/1.0 (attendance-app)" },
-      }
+      { headers: { "User-Agent": "AbsensiApp/1.0" } }
     );
-
     if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
     const data = await response.json();
-    const address = data.address;
-    let formatted = "";
-
-    if (address.house_number) formatted += address.house_number + " ";
-    if (address.road) formatted += address.road + ", ";
-    if (address.neighbourhood) formatted += address.neighbourhood + ", ";
-    if (address.village) formatted += address.village + ", ";
-    if (address.suburb) formatted += address.suburb + ", ";
-    if (address.city_district) formatted += address.city_district + ", ";
-    if (address.city) formatted += address.city + ", ";
-    if (address.state) formatted += address.state + ", ";
-    if (address.country) formatted += address.country;
-
-    return {
-      formatted: formatted.replace(/,\s*$/, "") || data.display_name,
-      details: address,
-      full: data.display_name,
-    };
+    return { formatted: data.display_name };
   } catch (e) {
     console.error("Error getting address:", e);
     return null;
@@ -228,54 +182,43 @@ form.addEventListener("submit", async function (e) {
   if (!validateForm()) return;
 
   showLoading(true);
-
   try {
     const kode = document.getElementById("kode_registrasi").value.trim();
 
-    // Cek apakah kode ditemukan
-    /*
-    script day 1: https://script.google.com/macros/s/AKfycbzJHMpuNWUioevQcvSNR5hmddyDZzU3HY_qHuGGL43lWdL3w1aH11o49salT2OI26vb/exec
-    script day 2: https://script.google.com/macros/s/AKfycbxK3ndYmHULg59hrDTdBN9jaKF6OB9um6ychIoR1yz3D9LSCythClRJvwV7i9QLqZjU/exec
-    */
-    const checkResponse = await fetch(
-      `https://script.google.com/macros/s/AKfycbzJHMpuNWUioevQcvSNR5hmddyDZzU3HY_qHuGGL43lWdL3w1aH11o49salT2OI26vb/exec?value=${encodeURIComponent(
-        kode
-      )}`
-    );
-    const checkResult = await checkResponse.json();
-
-    if (!checkResult.found) {
-      showAlert(
-        "error",
-        `<i class="fas fa-circle-xmark"></i> Kode registrasi <strong>${kode}</strong> tidak ditemukan`
-      );
-      showLoading(false);
-      return;
-    }
-
-    // lanjutkan kalau valid
-    const formData = {
+    // Cek & simpan langsung lewat Apps Script
+    const payload = {
+      action: "submitAttendance",
       nim: document.getElementById("nim").value.trim(),
       name: document.getElementById("name").value.trim(),
       email: document.getElementById("email").value.trim(),
       phone: document.getElementById("phone").value.trim(),
       institution: document.getElementById("institution").value.trim(),
       speaker: currentNarasumber?.speaker || "Tidak diketahui",
-      location: currentLocation,
       kode_registrasi: kode,
-      timestamp: serverTimestamp(),
-      submittedAt: new Date().toISOString(),
+      location: currentLocation,
     };
 
-    const docRef = await addDoc(collection(db, "attendance"), formData);
-    showAlert(
-      "success",
-      `<i class="fas fa-circle-check"></i> Absensi berhasil dikirim! ID: ${docRef.id}`
-    );
-    form.reset();
-    resetForm();
+    const res = await fetch(APP_SCRIPT_URL, {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+
+    const result = await res.json();
+    if (result.status === "error") {
+      showAlert(
+        "error",
+        `<i class="fas fa-circle-xmark"></i> ${result.value}`
+      );
+    } else {
+      showAlert(
+        "success",
+        `<i class="fas fa-circle-check"></i> ${result.value}`
+      );
+      form.reset();
+      resetForm();
+    }
   } catch (error) {
-    console.error("Error:", error);
+    console.error(error);
     showAlert(
       "error",
       `<i class="fas fa-circle-xmark"></i> Terjadi kesalahan: ${error.message}`
