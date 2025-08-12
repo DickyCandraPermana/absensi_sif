@@ -1,7 +1,5 @@
-// URL Web App Google Apps Script kamu
-// Pastikan sudah di-deploy sebagai Web App: "Anyone with the link"
 const APP_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbwNSgZgDT7-QroovNJj8Va8XMNuVUYEGzHtGBWmMF_RHfDKNuDLCoYML3v27xycL27R/exec";
+  "https://script.google.com/macros/s/AKfycbxSR6dX2ZAwX93tXE5UBzKEmwFeTJgYeTrN4tta2AceUcU4WEaOzQkaUB6zYo6Wss3o/exec";
 
 // DOM refs
 const main = document.getElementById("select-narasumber");
@@ -85,6 +83,7 @@ function showForm(index) {
     "ease-in-out",
     "duration-500",
     "rounded-bl-md",
+    "rounded-br-md",
     "flex-row-reverse",
     "pb-1",
     "pt-1",
@@ -185,7 +184,6 @@ form.addEventListener("submit", async function (e) {
   try {
     const kode = document.getElementById("kode_registrasi").value.trim();
 
-    // Cek & simpan langsung lewat Apps Script
     const payload = {
       action: "submitAttendance",
       nim: document.getElementById("nim").value.trim(),
@@ -205,10 +203,7 @@ form.addEventListener("submit", async function (e) {
 
     const result = await res.json();
     if (result.status === "error") {
-      showAlert(
-        "error",
-        `<i class="fas fa-circle-xmark"></i> ${result.value}`
-      );
+      showAlert("error", `<i class="fas fa-circle-xmark"></i> ${result.value}`);
     } else {
       showAlert(
         "success",
