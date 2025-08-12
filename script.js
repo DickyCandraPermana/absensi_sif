@@ -1,5 +1,5 @@
 const APP_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxSR6dX2ZAwX93tXE5UBzKEmwFeTJgYeTrN4tta2AceUcU4WEaOzQkaUB6zYo6Wss3o/exec";
+  "https://script.google.com/macros/s/AKfycby1Dwn8uiBcHB8G7UxXX5g4t4t0MQV585gKTQo64_QqRuRg6p0g-qr3swRkV19tHw6m/exec";
 
 // DOM refs
 const main = document.getElementById("select-narasumber");
@@ -25,12 +25,14 @@ const data = [
     speaker: "Cycas Rifky",
     startTime: "13:00",
     endTime: "15:00",
+    day: 1,
   },
   {
     name: "Cerdas Kelola Uang di Era Digital",
     speaker: "Himawan Adhi",
-    startTime: "09:45",
-    endTime: "11:30",
+    startTime: "01:45",
+    endTime: "23:59", //"11:30",
+    day: 2,
   },
 ];
 
@@ -194,6 +196,7 @@ form.addEventListener("submit", async function (e) {
       speaker: currentNarasumber?.speaker || "Tidak diketahui",
       kode_registrasi: kode,
       location: currentLocation,
+      day: currentNarasumber?.day,
     };
 
     const res = await fetch(APP_SCRIPT_URL, {
