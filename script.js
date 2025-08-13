@@ -1,5 +1,5 @@
 const APP_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycby1Dwn8uiBcHB8G7UxXX5g4t4t0MQV585gKTQo64_QqRuRg6p0g-qr3swRkV19tHw6m/exec";
+  "https://script.google.com/macros/s/AKfycbx6EJKc8yK4GwvwU2Bewk5xddE_PRQdYNApjWmtHY8KADlo9OvDAPgMeOdmTv5P05Va/exec";
 
 // DOM refs
 const main = document.getElementById("select-narasumber");
@@ -176,6 +176,49 @@ async function getAddressFromCoords(lat, lon) {
     return null;
   }
 }
+
+// Event listener: setiap selesai input kode registrasi (blur / Enter)
+document
+  .getElementById("kode_registrasi")
+  .addEventListener("blur", async function () {
+    const kode = this.value.trim();
+    if (!kode) return;
+
+    try {
+      showLoading(true);
+      const res = await fetch(
+        `${APP_SCRIPT_URL}?kode=${encodeURIComponent(
+          kode
+        )}&kode=${encodeURIComponent(currentNarasumber.day)}`
+      );
+      const result = await res.json();
+
+      if (result.status === "error") {
+        showAlert(
+          "error",
+          `<i class="fas fa-circle-xmark"></i> ${result.value}`
+        );
+        return;
+      }
+
+      // Isi elemen form berdasarkan data yang diterima
+      const data = result.data;
+      if (data) {
+        document.getElementById("name").value = data.Nama || "";
+        document.getElementById("email").value = data.Email || "";
+        document.getElementById("phone").value = data["Nomor Telepon"] || "";
+        document.getElementById("institution").value = data.Institusi || "";
+      }
+    } catch (error) {
+      console.error(error);
+      showAlert(
+        "error",
+        `<i class="fas fa-circle-xmark"></i> Gagal mengambil data: ${error.message}`
+      );
+    } finally {
+      showLoading(false);
+    }
+  });
 
 // Submit form
 form.addEventListener("submit", async function (e) {
