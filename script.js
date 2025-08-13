@@ -188,7 +188,7 @@ form.addEventListener("submit", async function (e) {
 
     const payload = {
       action: "submitAttendance",
-      nim: document.getElementById("nim").value.trim(),
+      nim: document.getElementById("nim").value.trim() ?? "",
       name: document.getElementById("name").value.trim(),
       email: document.getElementById("email").value.trim(),
       phone: document.getElementById("phone").value.trim(),
@@ -227,14 +227,13 @@ form.addEventListener("submit", async function (e) {
 });
 
 function validateForm() {
-  const nim = document.getElementById("nim").value.trim();
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
   const phone = document.getElementById("phone").value.trim();
   const institution = document.getElementById("institution").value.trim();
   const kode = document.getElementById("kode_registrasi").value.trim();
 
-  if (!nim || !phone || !name || !email || !institution || !kode) {
+  if (!phone || !name || !email || !institution || !kode) {
     showAlert(
       "error",
       `<i class="fas fa-circle-xmark"></i> Semua field wajib harus diisi`
