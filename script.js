@@ -1,5 +1,5 @@
 const APP_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxmtJy4FctOJvAmdkqm8buoz-DMrZmCvsjKDMgVsd0WI5u6KXWqXN9PRrajELGeO0F3/exec";
+  "https://script.google.com/macros/s/AKfycbwhgFq264rl6g8f0IlC_brwcP4NaZNygiKT3TMIpvJPdoQekbFHKAl4fKZFRsbd_U9f/exec";
 
 // DOM refs
 const main = document.getElementById("select-narasumber");
