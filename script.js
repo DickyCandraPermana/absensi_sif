@@ -23,15 +23,22 @@ const data = [
   {
     name: "Vokasi, Prompting, dan Vibe Coding: Siap menghadapi AI-driven Industry?",
     speaker: "Cycas Rifky",
-    startTime: "13:00",
-    endTime: "15:00",
+    startTime: "13:55",
+    endTime: "15:55",
     day: 1,
   },
   {
     name: "Cerdas Kelola Uang di Era Digital",
     speaker: "Himawan Adhi",
-    startTime: "01:45",
-    endTime: "23:59", //"11:30",
+    startTime: "09:55",
+    endTime: "11:45",
+    day: 2,
+  },
+  {
+    name: "Schooltech edufair",
+    speaker: "-",
+    startTime: "13:05",
+    endTime: "16:10",
     day: 2,
   },
 ];
