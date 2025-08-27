@@ -52,6 +52,12 @@ function checkTimeAndDisableButtons() {
   const now = new Date();
   const currentTime = now.getHours() * 60 + now.getMinutes();
 
+  // Validasi tanggal
+  const today = new Date();
+  const currentDay = today.getDate(); // Tanggal (1-31)
+  const currentMonth = today.getMonth() + 1; // Bulan (0-11)
+  const currentYear = today.getFullYear();
+
   data.forEach((narasumber, index) => {
     const button = document.getElementById(`narasumber-${index + 1}`);
     if (!button) return;
@@ -64,14 +70,47 @@ function checkTimeAndDisableButtons() {
     const [endHour, endMinute] = narasumber.endTime.split(":").map(Number);
     const endTimeInMinutes = endHour * 60 + endMinute;
 
-    if (currentTime >= startTimeInMinutes && currentTime <= endTimeInMinutes) {
+    let isButtonActive = false;
+    let buttonText = "Absen Belum Dibuka";
+
+    // Tambahkan kondisi validasi tanggal
+    if (
+      narasumber.day === 1 &&
+      currentDay === 29 &&
+      currentMonth === 8 &&
+      currentYear === 2025
+    ) {
+      if (
+        currentTime >= startTimeInMinutes &&
+        currentTime <= endTimeInMinutes
+      ) {
+        isButtonActive = true;
+        buttonText = "Absen";
+      }
+    } else if (
+      narasumber.day === 2 &&
+      currentDay === 30 &&
+      currentMonth === 8 &&
+      currentYear === 2025
+    ) {
+      // Contoh untuk hari kedua
+      if (
+        currentTime >= startTimeInMinutes &&
+        currentTime <= endTimeInMinutes
+      ) {
+        isButtonActive = true;
+        buttonText = "Absen";
+      }
+    }
+
+    if (isButtonActive) {
       button.disabled = false;
-      button.innerText = "Absen";
+      button.innerText = buttonText;
       button.classList.remove("bg-gray-400", "cursor-not-allowed");
       button.classList.add("bg-[#F4BA35]");
     } else {
       button.disabled = true;
-      button.innerText = "Absen Belum Dibuka";
+      button.innerText = buttonText;
       button.classList.add("bg-gray-400", "cursor-not-allowed");
       button.classList.remove("bg-[#F4BA35]");
     }
