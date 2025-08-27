@@ -1,5 +1,9 @@
 const APP_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbwhgFq264rl6g8f0IlC_brwcP4NaZNygiKT3TMIpvJPdoQekbFHKAl4fKZFRsbd_U9f/exec";
+  "https://script.google.com/macros/s/AKfycbzLy51Lb4GBhWfohMKTcSZWfaWCF1cREoyQhIlDq9tZcodkM3AyLJ_5BoYnKMgK3Bxt/exec";
+
+const APP_SCRIPT_URL_2 = "";
+
+const APP_SCRIPT_URL_3 = "";
 
 // DOM refs
 const main = document.getElementById("select-narasumber");
