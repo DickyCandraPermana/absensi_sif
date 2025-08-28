@@ -1,5 +1,5 @@
 const APP_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbzNzt7V63YVdaBiKeC5pq6R_9-y3KyKt8Sj3XJdKoxZ-v_XV-1HrrxTfa6vmiAq4PPQ/exec";
+  "https://script.google.com/macros/s/AKfycbzs1SKSAED40KoMpqQvy4QSkSf4tL3eYe6MA5YryPqfnFkuq0pDfmHcx-MVwdkKRTid/exec";
 
 const APP_SCRIPT_URL_2 = "";
 
@@ -27,7 +27,7 @@ const data = [
   {
     name: "Vokasi, Prompting, dan Vibe Coding: Siap menghadapi AI-driven Industry?",
     speaker: "Cycas Rifky",
-    startTime: "08:30",
+    startTime: "08:20",
     endTime: "15:55",
     day: 1,
   },
