@@ -1,5 +1,5 @@
 const APP_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbzs1SKSAED40KoMpqQvy4QSkSf4tL3eYe6MA5YryPqfnFkuq0pDfmHcx-MVwdkKRTid/exec";
+  "https://script.google.com/macros/s/AKfycbxFn4SPc5EuawYXGcdcDmosuGl4yX8JZYFeeC0suOUvSdseaZg9QkGKsDqlrXWvajjq/exec";
 
 const APP_SCRIPT_URL_2 = "";
 
@@ -239,7 +239,7 @@ document
       const res = await fetch(
         `${APP_SCRIPT_URL}?kode=${encodeURIComponent(
           kode
-        )}&kode=${encodeURIComponent(currentNarasumber.day)}`
+        )}&day=${encodeURIComponent(currentNarasumber.day)}`
       );
       const result = await res.json();
 
