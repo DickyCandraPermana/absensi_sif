@@ -27,7 +27,7 @@ const data = [
   {
     name: "Vokasi, Prompting, dan Vibe Coding: Siap menghadapi AI-driven Industry?",
     speaker: "Cycas Rifky",
-    startTime: "08:00",
+    startTime: "07:50",
     endTime: "15:55",
     day: 1,
   },
