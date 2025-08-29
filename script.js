@@ -358,7 +358,7 @@ function showAlert(type, message) {
   alert.className = `alert alert-${type}`;
   alert.innerHTML = message;
   alert.style.display = "block";
-  setTimeout(() => (alert.style.display = "none"), 5000);
+  //setTimeout(() => (alert.style.display = "none"), 5000);
 }
 
 function showLoading(show) {
